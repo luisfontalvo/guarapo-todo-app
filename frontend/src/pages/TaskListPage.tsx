@@ -16,14 +16,16 @@ const TaskListPage = () => {
   const navigate = useNavigate();
   const [tasks, setTasks] = useState<Task[]>([]);
   const [newTask, setNewTask] = useState("");
+  const [loading, setLoading] = useState(true);
 
   const fetchTasks = async () => {
     try {
       const data = await getTasks(id!);
       setTasks(data);
-    } catch (err) {
-      console.log(err);
+    } catch {
       navigate("/login");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -51,50 +53,57 @@ const TaskListPage = () => {
 
   return (
     <>
-      <h2 className="text-xl font-bold mb-4">Tareas</h2>
+      <h2 className="text-2xl font-bold text-center">Tareas</h2>
 
-      <form onSubmit={handleAddTask} className="flex gap-2 mb-4">
+      <form onSubmit={handleAddTask} className="flex gap-2">
         <Input
           type="text"
           placeholder="Nueva tarea"
           value={newTask}
           onChange={(e) => setNewTask(e.target.value)}
         />
-        <Button type="submit" variant="default">Agregar</Button>
+        <Button type="submit">Agregar</Button>
       </form>
 
-      <ul className="space-y-2">
-        {tasks.map((task) => (
-          <li
-            key={task.id}
-            className="flex items-center justify-between p-2 border rounded"
-          >
-            <label className="flex items-center gap-2">
-              <input
-                type="checkbox"
-                checked={task.completed}
-                onChange={(e) => handleComplete(task.id, e.target.checked)}
-              />
-              <span className={task.completed ? "line-through" : ""}>
-                {task.title}
-              </span>
-            </label>
-            <button
-              onClick={() => handleDelete(task.id)}
-              className="text-red-500 hover:text-red-700"
+      {loading ? (
+        <p className="text-center text-gray-500">Cargando...</p>
+      ) : (
+        <ul className="space-y-2">
+          {tasks.map((task) => (
+            <li
+              key={task.id}
+              className="flex items-center justify-between p-2 border rounded"
             >
-              ✕
-            </button>
-          </li>
-        ))}
-      </ul>
+              <label className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={task.completed}
+                  onChange={(e) => handleComplete(task.id, e.target.checked)}
+                />
+                <span
+                  className={task.completed ? "line-through text-gray-500" : ""}
+                >
+                  {task.title}
+                </span>
+              </label>
+              <button
+                onClick={() => handleDelete(task.id)}
+                className="text-red-500 hover:text-red-700"
+              >
+                ✕
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
 
-      <button
-        className="mt-4 text-blue-500 hover:underline"
+      <Button
+        variant="link"
+        className="w-full"
         onClick={() => navigate("/dashboard")}
       >
         ← Volver a listas
-      </button>
+      </Button>
     </>
   );
 };

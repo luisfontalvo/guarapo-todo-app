@@ -31,7 +31,7 @@ const DashboardPage = () => {
     e.preventDefault();
     if (!title.trim()) return;
     const newList = await createList(title);
-    setLists([...lists, {...newList, tasks: []}]);
+    setLists([...lists, { ...newList, tasks: [] }]);
     setTitle("");
   };
 
@@ -39,15 +39,11 @@ const DashboardPage = () => {
     fetchLists();
   }, [navigate]);
 
-  return loading ? (
-    <p>Cargando...</p>
-  ) : error ? (
-    <p className="text-red-500">{error}</p>
-  ) : (
+  return (
     <>
-      <h2 className="text-2xl font-bold mb-4">Tus listas</h2>
+      <h2 className="text-2xl font-bold text-center">Tus listas</h2>
 
-      <form onSubmit={handleAddList} className="flex gap-2 mb-4">
+      <form onSubmit={handleAddList} className="flex gap-2">
         <Input
           type="text"
           placeholder="Nueva lista"
@@ -57,17 +53,23 @@ const DashboardPage = () => {
         <Button type="submit">Crear</Button>
       </form>
 
-      <ul className="space-y-2">
-        {lists.map((list) => (
-          <li
-            key={list.id}
-            className="p-2 border rounded hover:bg-gray-100 cursor-pointer"
-            onClick={() => navigate(`/lists/${list.id}`)}
-          >
-            {list.title} ({list.tasks.length} tareas)
-          </li>
-        ))}
-      </ul>
+      {loading ? (
+        <p className="text-center text-gray-500">Cargando...</p>
+      ) : error ? (
+        <p className="text-red-500 text-sm text-center">{error}</p>
+      ) : (
+        <ul className="space-y-2">
+          {lists.map((list) => (
+            <li
+              key={list.id}
+              className="p-2 border rounded hover:bg-gray-50 cursor-pointer"
+              onClick={() => navigate(`/lists/${list.id}`)}
+            >
+              {list.title} ({list.tasks.length} tareas)
+            </li>
+          ))}
+        </ul>
+      )}
     </>
   );
 };

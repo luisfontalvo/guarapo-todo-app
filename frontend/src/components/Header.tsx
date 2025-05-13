@@ -12,7 +12,7 @@ const Header = () => {
   return (
     <header className="flex justify-between items-center max-w-md mx-auto mb-4">
       <h1 className="text-xl font-bold">Guarapo To-do</h1>
-      <Button variant="outline" size="sm" onClick={handleLogout}>
+      <Button variant="ghost" size="sm" onClick={handleLogout}>
         Cerrar sesión
       </Button>
     </header>

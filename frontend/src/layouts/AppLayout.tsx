@@ -1,13 +1,16 @@
 import Header from "@/components/Header";
+import { Card } from "@/components/ui/card";
 import { Outlet } from "react-router-dom";
 
 const AppLayout = () => {
   return (
-    <div className="min-h-screen bg-gray-100 p-4">
-      <Header />
-      <main className="max-w-md mx-auto bg-white p-4 rounded shadow">
-        <Outlet />
-      </main>
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
+      <Card className="w-full max-w-md p-6 space-y-6">
+        <Header />
+        <main className="flex flex-col gap-4">
+          <Outlet />
+        </main>
+      </Card>
     </div>
   );
 };
