@@ -88,15 +88,17 @@ npm install
 npm run dev
 ```
 
+Crear .env
+```bash
+VITE_API_URL="http://localhost:3000/dev"
+```
+
 ## 🧪 Prueba rápida
+
 Accede a /register para registrarte.
-
 Luego inicia sesión desde /login.
-
 Accede a /dashboard para ver tus listas.
-
 Haz clic en una lista para gestionar tareas.
-
 Agrega, marca como completadas o elimina tareas.
 
 ## 🗂 Rutas del frontend
@@ -107,6 +109,20 @@ Agrega, marca como completadas o elimina tareas.
 | `/login`     | Formulario de inicio de sesión          |
 | `/dashboard` | Vista general de todas las listas       |
 | `/lists/:id` | Vista de tareas de una lista específica |
+
+## 🗂 Rutas del backend
+
+| Método | Endpoint            | Descripción                          | Protegida 🔐 |
+| ------ | ------------------- | ------------------------------------ | ------------ |
+| POST   | `/auth/register`    | Registro de nuevo usuario            | ❌ No         |
+| POST   | `/auth/login`       | Inicio de sesión, devuelve token JWT | ❌ No         |
+| GET    | `/lists`            | Obtener listas del usuario logueado  | ✅ Sí         |
+| POST   | `/lists`            | Crear nueva lista                    | ✅ Sí         |
+| GET    | `/lists/{id}/tasks` | Obtener tareas de una lista          | ✅ Sí         |
+| POST   | `/lists/{id}/tasks` | Crear nueva tarea en una lista       | ✅ Sí         |
+| PUT    | `/tasks/{id}`       | Marcar tarea como completada/no      | ✅ Sí         |
+| DELETE | `/tasks/{id}`       | Eliminar una tarea                   | ✅ Sí         |
+
 
 ## 🧑‍🎓 Autor
 Desarrollado por [Luis Fontalvo].
