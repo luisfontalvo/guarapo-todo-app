@@ -11,8 +11,9 @@ const RegisterPage = () => {
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
+      setError("");
       const token = await register(email, password);
-      localStorage.setItem("token", token);
+      localStorage.setItem("AUTH_TOKEN", token);
       navigate("/dashboard");
     } catch (err) {
       console.log(err);

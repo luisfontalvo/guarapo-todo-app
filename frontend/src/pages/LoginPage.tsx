@@ -11,8 +11,9 @@ const LoginPage = () => {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
+      setError("");
       const token = await login(email, password);
-      localStorage.setItem("token", token);
+      localStorage.setItem("AUTH_TOKEN", token);
       navigate("/dashboard");
     } catch (err) {
       console.log(err);

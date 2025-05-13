@@ -16,6 +16,7 @@ plugins:
 functions:
   register:
     handler: src/routes/auth.registerHandler
+    timeout: 60
     events:
       - http:
           path: auth/register
@@ -24,7 +25,7 @@ functions:
 
   login:
     handler: src/routes/auth.loginHandler
-    timeout: 10
+    timeout: 60
     events:
       - http:
           path: auth/login
@@ -33,6 +34,7 @@ functions:
 
   createList:
     handler: src/routes/list.createListHandler
+    timeout: 60
     events:
       - http:
           path: lists
@@ -41,6 +43,7 @@ functions:
 
   getLists:
     handler: src/routes/list.getListsHandler
+    timeout: 60
     events:
       - http:
           path: lists
@@ -49,6 +52,7 @@ functions:
 
   getTasks:
     handler: src/routes/task.getTasksHandler
+    timeout: 60
     events:
       - http:
           path: lists/{id}/tasks
@@ -57,6 +61,7 @@ functions:
 
   addTask:
     handler: src/routes/task.addTaskHandler
+    timeout: 60
     events:
       - http:
           path: lists/{id}/tasks
@@ -65,6 +70,7 @@ functions:
 
   completeTask:
     handler: src/routes/task.completeTaskHandler
+    timeout: 60
     events:
       - http:
           path: tasks/{id}
@@ -73,6 +79,7 @@ functions:
 
   deleteTask:
     handler: src/routes/task.deleteTaskHandler
+    timeout: 60
     events:
       - http:
           path: tasks/{id}
