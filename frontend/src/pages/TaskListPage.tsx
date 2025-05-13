@@ -7,6 +7,8 @@ import {
   completeTask,
   deleteTask,
 } from "../services/taskService";
+import { Input } from "../components/ui/input";
+import { Button } from "../components/ui/button";
 import type { Task } from "@/types";
 
 const TaskListPage = () => {
@@ -52,16 +54,13 @@ const TaskListPage = () => {
       <h2 className="text-xl font-bold mb-4">Tareas</h2>
 
       <form onSubmit={handleAddTask} className="flex gap-2 mb-4">
-        <input
+        <Input
           type="text"
           placeholder="Nueva tarea"
-          className="flex-1 border p-2 rounded"
           value={newTask}
           onChange={(e) => setNewTask(e.target.value)}
         />
-        <button className="bg-green-500 text-white px-4 rounded hover:bg-green-600">
-          Agregar
-        </button>
+        <Button type="submit" variant="default">Agregar</Button>
       </form>
 
       <ul className="space-y-2">

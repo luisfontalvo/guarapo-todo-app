@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { getLists, createList } from "../services/listService";
+import { Input } from "../components/ui/input";
+import { Button } from "../components/ui/button";
 import type { List } from "@/types";
 
 const DashboardPage = () => {
@@ -46,16 +48,13 @@ const DashboardPage = () => {
       <h2 className="text-2xl font-bold mb-4">Tus listas</h2>
 
       <form onSubmit={handleAddList} className="flex gap-2 mb-4">
-        <input
+        <Input
           type="text"
           placeholder="Nueva lista"
-          className="flex-1 border p-2 rounded"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
-        <button className="bg-blue-500 text-white px-4 rounded hover:bg-blue-600">
-          Crear
-        </button>
+        <Button type="submit">Crear</Button>
       </form>
 
       <ul className="space-y-2">

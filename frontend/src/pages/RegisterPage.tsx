@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { register } from "../services/authService";
 import { useNavigate } from "react-router-dom";
+import { Input } from "../components/ui/input";
+import { Button } from "../components/ui/button";
+import { Label } from "../components/ui/label";
 
 const RegisterPage = () => {
   const [email, setEmail] = useState("");
@@ -25,27 +28,23 @@ const RegisterPage = () => {
     <div className="min-h-screen flex justify-center items-center bg-gray-100">
       <form
         onSubmit={handleRegister}
-        className="bg-white p-6 rounded shadow w-80"
+        className="bg-white p-6 rounded shadow w-80 space-y-4"
       >
         <h2 className="text-xl mb-4 font-bold">Registro</h2>
-        <input
-          type="email"
-          placeholder="Correo"
-          className="w-full p-2 mb-2 border rounded"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Contraseña"
-          className="w-full p-2 mb-2 border rounded"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        
+        <div className="mb-4">
+          <Label htmlFor="email">Correo</Label>
+          <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+        </div>
+
+        <div className="mb-4">
+          <Label htmlFor="password">Contraseña</Label>
+          <Input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        </div>
+
         {error && <p className="text-red-500 text-sm">{error}</p>}
-        <button className="w-full bg-blue-500 text-white p-2 rounded mt-2 hover:bg-blue-600">
-          Registrarse
-        </button>
+
+        <Button className="w-full" type="submit">Registrarse</Button>
       </form>
     </div>
   );
