@@ -7,7 +7,10 @@ export const register: APIGatewayProxyHandler = async (event) => {
   const { email, password } = JSON.parse(event.body!);
   const user = await findUserByEmail(email);
   if (user) {
-    return { statusCode: 400, body: JSON.stringify({ message: "Usuario ya existe" }) };
+    return {
+      statusCode: 400,
+      body: JSON.stringify({ message: "Usuario ya existe" }),
+    };
   }
 
   const newUser = await createUser(email, password);
@@ -18,7 +21,6 @@ export const register: APIGatewayProxyHandler = async (event) => {
     body: JSON.stringify({ token }),
   };
 };
-
 
 export const login: APIGatewayProxyHandler = async (event) => {
   try {

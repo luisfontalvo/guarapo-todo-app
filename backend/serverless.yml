@@ -30,3 +30,51 @@ functions:
           path: auth/login
           method: post
           cors: true
+
+  createList:
+    handler: src/routes/list.createListHandler
+    events:
+      - http:
+          path: lists
+          method: post
+          cors: true
+
+  getLists:
+    handler: src/routes/list.getListsHandler
+    events:
+      - http:
+          path: lists
+          method: get
+          cors: true
+
+  getTasks:
+    handler: src/routes/task.getTasksHandler
+    events:
+      - http:
+          path: lists/{id}/tasks
+          method: get
+          cors: true
+
+  addTask:
+    handler: src/routes/task.addTaskHandler
+    events:
+      - http:
+          path: lists/{id}/tasks
+          method: post
+          cors: true
+
+  completeTask:
+    handler: src/routes/task.completeTaskHandler
+    events:
+      - http:
+          path: tasks/{id}
+          method: put
+          cors: true
+
+  deleteTask:
+    handler: src/routes/task.deleteTaskHandler
+    events:
+      - http:
+          path: tasks/{id}
+          method: delete
+          cors: true
