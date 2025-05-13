@@ -14,9 +14,19 @@ plugins:
   - serverless-offline
 
 functions:
-  hello:
-    handler: src/handler.hello
+  register:
+    handler: src/routes/auth.registerHandler
     events:
       - http:
-          path: hello
-          method: get
+          path: auth/register
+          method: post
+          cors: true
+
+  login:
+    handler: src/routes/auth.loginHandler
+    timeout: 10
+    events:
+      - http:
+          path: auth/login
+          method: post
+          cors: true
